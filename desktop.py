@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Native macOS shell for Disk Evidence."""
+"""Native macOS shell for Disk Scan."""
 from __future__ import annotations
 
 import threading
@@ -53,7 +53,7 @@ def run() -> None:
     ]
     try:
         window = webview.create_window(
-            "Disk Evidence",
+            "Disk Scan",
             url,
             width=1080,
             height=760,
@@ -75,8 +75,8 @@ if __name__ == "__main__":
         import AppKit
 
         alert = AppKit.NSAlert.alloc().init()
-        alert.setMessageText_("Disk Evidence could not start")
-        alert.setInformativeText_("The local app failed to open. Restart Disk Evidence and try again.")
+        alert.setMessageText_("Disk Scan could not start")
+        alert.setInformativeText_("The local app failed to open. Restart Disk Scan and try again.")
         alert.addButtonWithTitle_("OK")
         alert.runModal()
         raise SystemExit(1)

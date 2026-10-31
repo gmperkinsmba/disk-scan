@@ -360,7 +360,7 @@ def make_server(root_arg: str | Path | None = None, port: int = 8315) -> Threadi
 
 def serve(root_arg: str | None):
     server=make_server(root_arg,8315)
-    print(f"Disk Evidence: http://127.0.0.1:{server.server_port} ({'synthetic demo' if server.is_demo else 'selected folder'})",flush=True)
+    print(f"Disk Scan: http://127.0.0.1:{server.server_port} ({'synthetic demo' if server.is_demo else 'selected folder'})",flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass
     finally:server.server_close()

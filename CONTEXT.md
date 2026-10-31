@@ -1,6 +1,6 @@
 # Context
 
-Disk Evidence produces a read-only file inventory for one explicit folder root. Its main records are scan files, exact duplicate groups, same-name content conflicts, growth observations, exclusions, and a review-only cleanup plan.
+Disk Scan produces a read-only file inventory for one explicit folder root. Its main records are scan files, exact duplicate groups, same-name content conflicts, growth observations, exclusions, and a review-only cleanup plan.
 
 The scanner follows only regular files and directories opened relative to the selected root. It rejects symbolic links in the root path, skips symbolic links below it, and applies file, byte, and time limits. Incomplete scans remain visible and do not update the size-comparison baseline.
 
