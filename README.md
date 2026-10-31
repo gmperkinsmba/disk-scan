@@ -1,8 +1,8 @@
-# Disk Evidence
+# Disk Scan
 
 **First principle:** Show evidence for each cleanup idea. Never change scanned files.
 
-Disk Evidence is a local, read-only folder scanner. It groups exact byte duplicates by SHA-256. It flags files with the same name but different contents. It compares file sizes across complete scans. Its cleanup plan proposes one copy to keep and rechecks every file. The plan does not delete or move files.
+Disk Scan is a local, read-only folder scanner. It groups exact byte duplicates by SHA-256. It flags files with the same name but different contents. It compares file sizes across complete scans. Its cleanup plan proposes one copy to keep and rechecks every file. The plan does not delete or move files.
 
 ## macOS app
 
@@ -16,9 +16,9 @@ To build on macOS with Python 3.12 and uv:
     python build_desktop.py
     python install_desktop.py
 
-The build writes `dist/Disk Evidence.app`. It replaces only an earlier build with the matching bundle ID and ownership marker, and keeps a timestamped copy. The installer checks the app identity before copying it to `~/Applications`; it refuses unmarked or unrelated apps and keeps a timestamped copy of an owned install. PyInstaller applies an ad-hoc signature. The app has no Apple Developer ID signature and is not notarized. macOS may ask you to approve opening it. Build on macOS for its Cocoa window. The bundle includes third-party license notices.
+The build writes `dist/Disk Scan.app`. It replaces only an earlier build with the matching bundle ID and ownership marker, and keeps a timestamped copy. The installer checks the app identity before copying it to `~/Applications`; it refuses unmarked or unrelated apps and keeps a timestamped copy of an owned install. PyInstaller applies an ad-hoc signature. The app has no Apple Developer ID signature and is not notarized. macOS may ask you to approve opening it. Build on macOS for its Cocoa window. The bundle includes third-party license notices.
 
-After install, open `~/Applications/Disk Evidence.app` in Finder. The bundle includes its Python runtime, so the app does not need a separate Python install, browser, or server command. Quit with Command-Q or close its window. To uninstall, move the app to Trash. Local settings and demo data in `~/.disk-evidence` remain.
+After install, open `~/Applications/Disk Scan.app` in Finder. The bundle includes its Python runtime, so the app does not need a separate Python install, browser, or server command. Quit with Command-Q or close its window. To uninstall, move the app to Trash. Local settings and demo data in `~/.disk-evidence` remain.
 
 To work on the native shell, keep the source assets in this folder and run `python desktop.py` from the activated environment. The desktop shell does not expose a Python bridge to page scripts.
 
@@ -46,7 +46,7 @@ The default limits are 5,000 files, 500 MB read, and 10 seconds. Hard limits are
 
 ## Review and export
 
-The scan view shows file sizes and shortened hashes, duplicate groups, same-name conflicts, and size growth. Pick one retained copy per duplicate group to draft a review plan. The app re-reads the files within the scan limits and marks changed files stale. Export saves the current scan and optional plan as JSON. No cleanup action is implemented.
+The scan view shows file sizes and shortened hashes, duplicate groups, same-name conflicts, and size growth. Pick one retained copy per duplicate group to draft a review plan. The app re-reads the files within the scan limits and marks changed files stale. Export saves the current scan and optional plan as `disk-scan-review.json`. No cleanup action is implemented.
 
 ## Tests
 
