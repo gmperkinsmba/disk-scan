@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Disk Evidence</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <main class="shell" id="app" data-token="__TOKEN__" data-demo="__DEMO__">
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Disk Evidence home"><span class="mark" aria-hidden="true">D</span><span>Disk Evidence</span></a>
+      <span class="privacy"><span class="dot"></span> Read only</span>
+    </header>
+
+    <section class="intro" aria-labelledby="title">
+      <div class="intro-copy">
+        <p class="eyebrow">LOCAL FOLDER REVIEW</p>
+        <h1 id="title">Disk Evidence</h1>
+        <p class="subtitle">Scan a folder to find exact duplicates, same-name files, and file growth before cleanup.</p>
+      </div>
+      <div class="scope-card">
+        <span class="scope-label">SCAN SCOPE</span>
+        <strong id="scopeName">Waiting for scan</strong>
+        <span id="scopeHint">The folder is set when the server starts.</span>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Scan controls">
+      <button class="primary" id="scanBtn" type="button"><span aria-hidden="true">↻</span> Scan folder</button>
+      <button class="secondary" id="settingsToggle" type="button" aria-expanded="false" aria-controls="settings">Settings</button>
+      <span class="status" id="status" role="status">Ready to scan</span>
+      <span class="scan-time" id="scanTime"></span>
+    </section>
+
+    <section class="settings panel" id="settings" hidden aria-labelledby="settingsTitle">
+      <div class="section-heading"><div><p class="eyebrow">SCAN BOUNDS</p><h2 id="settingsTitle">Settings</h2></div><button class="text-button" id="settingsClose" type="button">Close</button></div>
+      <p class="muted">Exclusions are relative to the selected folder. Built-in exclusions include common package and version folders.</p>
+      <div class="settings-grid">
+        <label class="field wide">Extra excluded paths <span class="hint">One relative path per line</span><textarea id="exclusions" rows="4" spellcheck="false" placeholder="exports/archive"></textarea></label>
+        <label class="field">Maximum files <input id="maxFiles" type="number" min="1" max="20000"></label>
+        <label class="field">Maximum bytes to hash <input id="maxBytes" type="number" min="1" max="2000000000"></label>
+        <label class="field">Time limit in seconds <input id="maxSeconds" type="number" min="1" max="25"></label>
+      </div>
+      <button class="secondary" id="saveSettings" type="button">Save scan limits</button>
+    </section>
+
+    <section class="metrics" aria-label="Latest scan summary">
+      <article class="metric"><span>Files checked</span><strong id="filesCount">—</strong><small id="bytesCount">No scan yet</small></article>
+      <article class="metric"><span>Exact duplicate groups</span><strong id="duplicateCount">—</strong><small>Matched by SHA-256 bytes</small></article>
+      <article class="metric"><span>Growth paths</span><strong id="growthCount">—</strong><small>Compared with last complete scan</small></article>
+      <article class="metric"><span>Same-name conflicts</span><strong id="sameNameCount">—</strong><small>Different content, same name</small></article>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel evidence-panel" aria-labelledby="evidenceTitle">
+        <div class="section-heading"><div><p class="eyebrow">SCAN EVIDENCE</p><h2 id="evidenceTitle">Review files</h2></div><label class="search"><span class="sr-only">Filter file paths</span><input id="filter" type="search" placeholder="Filter paths" autocomplete="off"></label></div>
+        <div class="incomplete" id="incomplete" hidden></div>
+        <div class="file-list" id="fileList"><div class="empty"><span class="empty-icon" aria-hidden="true">◌</span><strong>No scan evidence yet</strong><span>Run a scan to see file sizes, hashes, duplicate groups, and growth.</span></div></div>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel chart-panel" aria-labelledby="chartTitle"><div class="section-heading"><div><p class="eyebrow">SPACE PROFILE</p><h2 id="chartTitle">Largest files</h2></div></div><div id="sizeChart" class="size-chart"><p class="muted">File size bars appear after a scan.</p></div></section>
+        <section class="panel plan-panel" aria-labelledby="planTitle"><div class="section-heading"><div><p class="eyebrow">REVIEW ONLY</p><h2 id="planTitle">Duplicate plan</h2></div></div><p class="muted">Choose a retained copy in each exact duplicate group. The plan rechecks every file and never changes the folder.</p><div id="duplicateGroups" class="duplicate-groups"><p class="muted">No duplicate groups found yet.</p></div><div class="plan-actions"><button class="secondary" id="draftPlan" type="button" disabled>Draft review plan</button><button class="text-button" id="exportPlan" type="button" disabled>Export evidence JSON</button></div><div id="planResult" class="plan-result" aria-live="polite"></div></section>
+        <section class="panel growth-panel" aria-labelledby="growthTitle"><div class="section-heading"><div><p class="eyebrow">CHANGE OVER TIME</p><h2 id="growthTitle">File growth</h2></div></div><div id="growthList"><p class="muted">Growth appears after two complete scans.</p></div><div class="demo-action" id="demoAction" hidden><button class="text-button" id="growDemo" type="button">Add synthetic log line</button><span>Demo fixture only</span></div></section>
+      </aside>
+    </section>
+
+    <footer><span>Local only. Scans never change files.</span><span id="scanFootnote">Symlinks and non-file entries are skipped.</span></footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

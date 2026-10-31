@@ -1,0 +1,3 @@
+Disk Evidence desktop bundle
+io.github.gmperkinsmba.disk-evidence
+local-build-owner-marker-v1
